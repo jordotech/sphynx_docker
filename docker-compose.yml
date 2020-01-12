@@ -1,0 +1,22 @@
+version: '3.5'
+services:
+
+  sphinx:
+    container_name: sphynx_docs
+    build:
+      context: .
+    entrypoint: ["sphinx-autobuild", ".", "./_build/html"]
+
+    environment:
+      - SHELL=/bin/bash
+      - USER_ID=501
+    volumes:
+      - ./docs/:/doc
+  nginx:
+    container_name: sphynx_docs_nginx
+    image: nginx
+    ports:
+      - 9876:80
+    volumes:
+      - ./docs/:/doc
+      - ./default.conf:/etc/nginx/conf.d/default.conf
