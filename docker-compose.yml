@@ -2,18 +2,19 @@ version: '3.5'
 services:
 
   sphinx:
-    container_name: sphynx_docs
+    container_name: docs_sphinx
     build:
       context: .
-    entrypoint: ["sphinx-autobuild", ".", "./_build/html"]
-
+    command: sphinx-autobuild . ./_build/html -p 7676 -H 0.0.0.0 -v --poll
     environment:
       - SHELL=/bin/bash
       - USER_ID=501
     volumes:
-      - ./docs/:/doc
+      - ./docs/:/doc:delegated
+    ports:
+      - "7676:7676"
   nginx:
-    container_name: sphynx_docs_nginx
+    container_name: docs_nginx
     image: nginx
     ports:
       - 9876:80
