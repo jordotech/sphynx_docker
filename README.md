@@ -17,4 +17,4 @@
    
 Navigate to [how to edit this documentation](http://localhost:9876/howtouse.html) for further instructions
 
-To create/update the pdf version, ssh into the container and run ``make_pdf``
+To create/update the pdf version, run `./make_pdf.sh` on the host while the containers are running.
